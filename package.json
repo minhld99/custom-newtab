@@ -2,38 +2,33 @@
   "name": "custom-control",
   "version": "0.1.0",
   "private": true,
+  "main": "gulpfile.js",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "gulp": "^4.0.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "backbone": "^1.2.1",
+    "browserify": "^11.0.1",
+    "connect": "^3.4.0",
+    "forever": "^0.15.1",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-minify": "^3.1.0",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rimraf": "^1.0.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "jquery": "^2.1.4",
+    "moment": "^2.10.6",
+    "moment-timezone": "^0.4.0",
+    "react": "^0.13.3",
+    "react-router": "^2.0.0",
+    "react-timer-mixin": "^0.13.2",
+    "reactify": "^1.1.1",
+    "serve-static": "^1.10.0",
+    "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "node server.js",
+    "build": "echo \"Lỗi: Không có bản build đâu ạ\" && exit 1",
+    "test": "echo \"Lỗi: Không có bản test đâu ạ\" && exit 1",
+    "eject": "echo \"Lỗi: Không có bản eject đâu ạ\" && exit 1"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "author": "Minh & Hà"
 }

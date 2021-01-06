@@ -8,11 +8,11 @@ In the project directory, you can run:
 
 ### `npm install`
 
-Install all necessary packages.\
+Install all necessary packages.
 
 ### `gulp`
 
-Packages jsx and css files into dist folder for running locally.\
+Packages jsx and css files into dist folder for running locally.
 
 ### `npm start`
 

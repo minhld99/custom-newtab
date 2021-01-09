@@ -42129,17 +42129,17 @@ arguments[4][29][0].apply(exports,arguments)
 var $ = require("jquery");
 var React = require("react");
 var TimerMixin = require("react-timer-mixin");
-var ReactRouter = require('react-router')
-var Router = ReactRouter.Router
-var Navigation = ReactRouter.Navigation
-var Route = ReactRouter.Route
-var Link = ReactRouter.Link
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var Navigation = ReactRouter.Navigation;
+var Route = ReactRouter.Route;
+var Link = ReactRouter.Link;
 
 var moment = require("moment");
 moment().utc();
 
 var storageAffix = "newtab-";
-var weatherApiBase = "http://api.openweathermap.org/data/2.5/weather?APPID=732e78b853a08a9dfdeeba03592cf1aa";
+var weatherApiBase = "http://api.openweathermap.org/data/2.5/weather?APPID=7b49265e4a56d70167022401a00887fa";
 
 function getData(name) {
     var data = localStorage[storageAffix + name];
@@ -42151,8 +42151,7 @@ function setData(name, data) {
     localStorage[storageAffix + name] = JSON.stringify(data);
 }
 
-function delData(name)
-{
+function delData(name) {
     localStorage.removeItem(storageAffix + name);
 }
 
@@ -42208,10 +42207,53 @@ var Settings = React.createClass({displayName: "Settings",
     },
 
     toggleDarkTheme: function() {
-        this.setState({darkTheme: !this.state.darkTheme});
+        this.setState({darkTheme: !this.state.darkTheme}, this.toggleCssStyle);
+    },
+
+    toggleCssStyle: function() {
+        if (this.state.darkTheme != true) {
+            $("body").css('background', 'white');
+            $("section").css('color', 'black');
+            $("input[type='text']").css('color', 'black');
+            $("input[type='text']:hover, input[type='text']:focus").css('border-color', "black");
+            $("header").css('color', 'black');
+            $(".form-group").css('border-left', '2px solid black');
+            $(".form-group-seamless").css('border', 'none');
+            $("a.button").css('color', 'black');
+            $("a.button:hover").css('color', 'white', 'background', 'black');
+            $("select").css('border', '2px solid black');
+            $("select").css('color', 'black');
+            $("hr").css('background', 'black');
+            $("a.edit").css('color', 'black');
+            $(".onoffswitch-inner:before, .onoffswitch-inner:after").css('color', 'black');
+            $("onoffswitch-inner:before").css('border', 'white');
+            $(".onoffswitch-inner:after").css('border', 'white');
+            $(".onoffswitch-switch").css('color', 'white');
+        }
+        else {
+            $("body").css('background', 'black');
+            $("section").css('color', 'white');
+            $("input[type='text']").css('color', 'white');
+            $("input[type='text']:hover, input[type='text']:focus").css('border-color', "white");
+            $("header").css('color', 'white');
+            $(".form-group").css('border-left', '2px solid white');
+            $(".form-group-seamless").css('border', 'none');
+            $("a.button").css('color', 'white');
+            $("a.button:hover").css('color', 'white', 'background', 'white');
+            $("select").css('border', '2px solid white');
+            $("select").css('color', 'white');
+            $("hr").css('background', 'white');
+            $("a.edit").css('color', 'white');
+            $(".onoffswitch-inner:before, .onoffswitch-inner:after").css('color', 'white');
+            $("onoffswitch-inner:before").css('border', 'black');
+            $(".onoffswitch-inner:after").css('border', 'black');
+            $(".onoffswitch-switch").css('color', 'black');
+        }
     },
 
     render: function() {
+        console.log('this.state.darkTheme = ' + this.state.darkTheme)
+
         return (
             React.createElement("div", {id: "settings"}, 
                 React.createElement("header", null, 
@@ -42234,11 +42276,11 @@ var Settings = React.createClass({displayName: "Settings",
                     )
                 ), 
                 React.createElement("section", {className: "settings-area"}, 
-                    React.createElement("h3", null, "Settings / Cài đặt"), 
+                    React.createElement("h3", null, "Options / Các lựa chọn"), 
                     React.createElement("div", {className: "form-group"}, 
                         React.createElement("h4", null, "Weather / Thời tiết"), 
                         React.createElement("div", {className: "form-item form-space-after"}, 
-                            React.createElement("label", {htmlFor: "showWeather"}, "Show Weather / Thời tiết"), 
+                            React.createElement("label", {htmlFor: "showWeather"}, "Show Weather / Hiện thời tiết"), 
                             React.createElement("div", {className: "onoffswitch"}, 
                                 React.createElement("input", {className: "onoffswitch-checkbox", id: "showWeather", checked: this.state.showWeather, type: "checkbox"}), 
                                 React.createElement("label", {onClick: this.toggleWeather, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
@@ -42275,7 +42317,7 @@ var Settings = React.createClass({displayName: "Settings",
                             React.createElement("div", {className: "onoffswitch"}, 
                                 React.createElement("input", {className: "onoffswitch-checkbox", id: "darkTheme", checked: this.state.darkTheme, type: "checkbox"}), 
                                 React.createElement("label", {onClick: this.toggleDarkTheme, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
-                                    React.createElement("span", {className: "onoffswitch-inner onoffswitch-theme-inner"}), 
+                                    React.createElement("span", {className: "onoffswitch-inner onoffswitch-theme-inner"}, this.toggleCssStyle), 
                                     React.createElement("span", {className: "onoffswitch-switch"})
                                 )
                             )
@@ -42299,7 +42341,7 @@ var Background = React.createClass({displayName: "Background",
 
     getInitialState: function() {
         return {
-            delay: 7500,
+            delay: 7000,
             loaded: false,
             src: ''
         };
@@ -42408,8 +42450,18 @@ var Weather = React.createClass({displayName: "Weather",
             weather: {
                 wind: 0,
                 temp: 0
-            }
+            },
+            ms: true,
+            celsius: true
         };
+    },
+
+    handleTempClick: function() {
+        this.setState({celsius: !this.state.celsius});
+    },
+
+    handleWindClick: function() {
+        this.setState({ms: !this.state.ms});
     },
 
     componentDidMount: function() {
@@ -42478,13 +42530,19 @@ var Weather = React.createClass({displayName: "Weather",
         if (userData.city.toLowerCase() == 'auto')
         {
             //TODO: Save the current position instead of polling it constantly
+
+            navigator.geolocation.getCurrentPosition(function (loc) {console.log(loc)}, function () {}, {});
+            //The working next statement.
             navigator.geolocation.getCurrentPosition(function (loc) {
+                console.log(loc)
                 url = weatherApiBase + '&lat=' + loc.coords.latitude + '&lon=' + loc.coords.longitude + '&units=metric';
                 this.getWeatherForUrl(url);
-            }.bind(this));
+                console.log(url);
+            }.bind(this))
         } else {
             url = weatherApiBase + '&q=' + userData.city + '&units=metric';
             this.getWeatherForUrl(url);
+            console.log(url);
         }
     },
 
@@ -42562,22 +42620,42 @@ var Weather = React.createClass({displayName: "Weather",
         var userData = getData("user");
 
         var temperature = userData.showTemperature ? (
-                React.createElement("div", {className: "temperature"}, 
-                    React.createElement("div", {id: "temp"}, 
-                        this.state.weather.temp, 
-                        React.createElement("span", {id: "tempUnit"}, "°C")
-                    ), 
-                    React.createElement("span", {id: "location"}, this.state.weather.city)
+            this.state.celsius ? (
+                    React.createElement("div", {className: "temperature"}, 
+                        React.createElement("div", {id: "temp"}, 
+                            this.state.weather.temp, 
+                            React.createElement("span", null, React.createElement("button", {id: "tempUnit", onClick: this.handleTempClick}, "°C"))
+                        ), 
+                        React.createElement("span", {id: "location"}, this.state.weather.city)
+                    )
+                ) : (
+                    React.createElement("div", {className: "temperature"}, 
+                        React.createElement("div", {id: "temp"}, 
+                            (this.state.weather.temp * 1.8 + 32).toFixed(1), 
+                            React.createElement("span", null, React.createElement("button", {id: "tempUnit", onClick: this.handleTempClick}, "℉"))
+                        ), 
+                        React.createElement("span", {id: "location"}, this.state.weather.city)
+                    )
                 )
             ) : null;
 
         var wind = userData.showWindSpeed ? (
-                React.createElement("div", {className: "wind"}, 
-                    React.createElement("div", {id: "wind"}, 
-                        this.state.weather.wind, 
-                        React.createElement("span", {id: "windUnit"}, "m/s")
-                    ), 
-                    React.createElement("span", {id: "windText"}, this.getWindText(this.state.weather.wind))
+            this.state.ms ? (
+                    React.createElement("div", {className: "wind"}, 
+                        React.createElement("div", {id: "wind"}, 
+                            this.state.weather.wind, 
+                            React.createElement("span", null, React.createElement("button", {id: "windUnit", onClick: this.handleWindClick}, "m/s"))
+                        ), 
+                        React.createElement("span", {id: "windText"}, this.getWindText(this.state.weather.wind))
+                    )
+                ) : (
+                    React.createElement("div", {className: "wind"}, 
+                        React.createElement("div", {id: "wind"}, 
+                            (this.state.weather.wind * 3.6).toFixed(1), 
+                            React.createElement("span", null, React.createElement("button", {id: "windUnit", onClick: this.handleWindClick}, "km/h"))
+                        ), 
+                        React.createElement("span", {id: "windText"}, this.getWindText(this.state.weather.wind))
+                    )
                 )
             ) : null;
 
@@ -42600,6 +42678,11 @@ var App = React.createClass({displayName: "App",
 
     render: function() {
         var storedData = getData(this.state.storageId);
+        let name = "Google";
+        let action = "https://google.com/search";
+        const icon = `https://external-content.duckduckgo.com/ip3/${
+            action.split("://")[1].split("/")[0]
+        }.ico`;
         if (storedData == null) {
             return React.createElement(Settings, null);
         } else {
@@ -42612,17 +42695,29 @@ var App = React.createClass({displayName: "App",
                         weather
                     ), 
 
+                    React.createElement("center", null, 
+                        React.createElement("form", {action: action, id: "search-bar-container"}, 
+                            React.createElement("input", {
+                                autoFocus: true, 
+                                type: "text", 
+                                placeholder: `Search ${name} or type a URL`, 
+                                autoComplete: "off"}
+                            ), 
+                            React.createElement("button", {type: "submit"}, 
+                                React.createElement("img", {src: icon, className: "icon", alt: `${name} icon`})
+                            )
+                        )
+                    ), 
+
                     React.createElement("svg", {id: "loading", height: "32", width: "32"}, 
-                      React.createElement("polygon", {points: "1,16 16,1 16,16", style: { fill: 'transparent', stroke:'white', strokeWidth: 2}}), 
-                      React.createElement("polygon", {points: "16,16, 16,31 31,16", style: { fill: 'transparent', stroke:'white', strokeWidth: 2}})
+                        React.createElement("polygon", {points: "1,16 16,1 16,16", style: { fill: 'transparent', stroke:'white', strokeWidth: 2}}), 
+                        React.createElement("polygon", {points: "16,16, 16,31 31,16", style: { fill: 'transparent', stroke:'white', strokeWidth: 2}})
                     ), 
 
                     React.createElement(Background, null)
                 )
             );
         }
-
-
     }
 });
 

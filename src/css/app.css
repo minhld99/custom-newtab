@@ -72,6 +72,13 @@ aside {
 	bottom: 2em;
 }
 
+center {
+	z-index: 100;
+	position: absolute;
+	left: 40%;
+	bottom: 50%;
+}
+
 header {
 	color: white;
 }
@@ -182,7 +189,18 @@ hr {
 }
 
 #tempUnit, #windUnit {
+	border: none;
+	background: none;
+	color: white;
 	font-size: 32px;
+}
+
+#tempUnit:hover, #windUnit:hover {
+	font-size: 45px;
+}
+
+#tempUnit:focus, #windUnit:focus {
+	outline: none;
 }
 
 #location, #greeting, #windText {
@@ -205,6 +223,7 @@ a.edit {
 
 .edit:hover {
 	opacity: 1;
+	font-size: 16px;
 	cursor: pointer;
 }
 
@@ -244,7 +263,8 @@ a.edit {
 .onoffswitch-inner:after {
     content: "OFF";
     padding-right: 10px;
-    background-color: #000000; color: #737373;
+	background-color: #000000; color: #737373;
+	/* background-color: #000000; color: #FFFFFF; */
     text-align: right;
 }
 .onoffswitch-switch {
@@ -269,4 +289,54 @@ a.edit {
 .onoffswitch-theme-inner:after {
 	color: white;
 	content: 'LIGHT' !important;
+}
+
+#search-bar-container {
+	width: 100%;
+	display: flex;
+}
+
+#search-bar-container button {
+	margin-top: auto;
+	margin-bottom: auto;
+	outline: none;
+	cursor: pointer;
+	width: 32px;
+	height: 32px;
+	background-color: transparent;
+	border: none;
+}
+
+#search-bar-container button .icon {
+	width: 32px;
+	height: 32px;
+}
+  
+#search-bar-container.expanded {
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+  
+@media only screen and (max-width: 600px) {
+	#search-bar-container {
+	  	width: 95%;
+	}
+}
+
+::-webkit-input-placeholder { /* Chrome */
+	color: white;
+}
+
+:-ms-input-placeholder { /* IE 10+ */
+	color: white;
+}
+
+::-moz-placeholder { /* Firefox 19+ */
+	color: white;
+	opacity: 1;
+}
+
+:-moz-placeholder { /* Firefox 4 - 18 */
+	color: white;
+	opacity: 1;
 }

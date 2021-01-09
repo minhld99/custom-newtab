@@ -31,7 +31,7 @@ You will also see any errors in the browser console.
   - [x] Show weather (temperature, wind speed). ```This will refreshes every minute```
   - [x] Handle state, click, change.
   - [x] Allow settings change.
-  - [ ] Toggle theme (Dark, Light)
+  - [x] Toggle theme (Dark, Light)
   - [ ] Add lunar calendar
   - [ ] Add demo
-  - [ ] Deploy server
+  - [ ] Make it available on Github pages

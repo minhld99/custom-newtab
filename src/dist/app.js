@@ -42139,7 +42139,7 @@ var moment = require("moment");
 moment().utc();
 
 var storageAffix = "newtab-";
-var weatherApiBase = "http://api.openweathermap.org/data/2.5/weather?APPID=7b49265e4a56d70167022401a00887fa";
+var weatherApiBase = "https://api.openweathermap.org/data/2.5/weather?APPID=7b49265e4a56d70167022401a00887fa";
 
 function getData(name) {
     var data = localStorage[storageAffix + name];

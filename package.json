@@ -25,7 +25,7 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "start": "node server.js",
+    "start": "gulp && node server.js",
     "build": "echo \"Lỗi: Không có bản build đâu ạ\" && exit 1",
     "test": "echo \"Lỗi: Không có bản test đâu ạ\" && exit 1",
     "eject": "echo \"Lỗi: Không có bản eject đâu ạ\" && exit 1"

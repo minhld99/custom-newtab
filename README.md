@@ -34,4 +34,4 @@ You will also see any errors in the browser console.
   - [x] Toggle theme (Dark, Light)
   - [ ] Add lunar calendar
   - [ ] Add demo
-  - [ ] Make it available on Github pages
+  - [x] Make it available on Github pages

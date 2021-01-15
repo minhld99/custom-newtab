@@ -42161,13 +42161,13 @@ var Settings = React.createClass({displayName: "Settings",
 
     getInitialState: function() {
         return {
-            name: 'Minh',
-            city: 'Auto',
-            showWeather: true,
-            showTemperature: true,
-            showWindSpeed: false,
-            isDarkTheme: true,
-            isEnglish: true,
+            name: getData("user").name || 'Minh',
+            city: getData("user").city || 'Auto',
+            showWeather: getData("user").showWeather || true,
+            showTemperature: getData("user").showTemperature || true,
+            showWindSpeed: getData("user").showWindSpeed || false,
+            isDarkTheme: getData("user").isDarkTheme || true,
+            isEnglish: getData("user").isEnglish || true,
         };
     },
 
@@ -42860,7 +42860,7 @@ var App = React.createClass({displayName: "App",
                         React.createElement("form", {action: action, id: "search-bar-container"}, 
                             React.createElement("input", {
                                 autoFocus: true, 
-                                type: "text", 
+                                type: "search", 
                                 name: "q", 
                                 placeholder: `Search ${engine} or type a URL`, 
                                 autoComplete: "off"}

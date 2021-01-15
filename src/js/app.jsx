@@ -732,7 +732,7 @@ var App = React.createClass({
                         <form action={action} id="search-bar-container">
                             <input
                                 autoFocus
-                                type="text"
+                                type="search"
                                 name="q"
                                 placeholder={`Search ${engine} or type a URL`}
                                 autoComplete="off"

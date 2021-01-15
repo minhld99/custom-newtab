@@ -32,6 +32,16 @@ input[type='text']:hover, input[type='text']:focus {
 	border-color: white;
 }
 
+input[type='search'] {
+	outline: none;
+	width: 300px;
+	max-width: 500px;
+	padding: 1em;
+	color: white;
+	border: 2px solid #FFF;
+	background: transparent;
+	transition: all linear .3s;
+}
 
 h1 {
 	font-size: 60px;

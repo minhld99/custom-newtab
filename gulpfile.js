@@ -21,7 +21,7 @@ gulp.task('browserify', ['clean'], function(){
 });
 
 gulp.task('minify-css', ['browserify'], function() {
-	return gulp.src('./src/css/app.css')
+	return gulp.src('./src/css/*.css')
     .pipe(sourcemaps.init())
     .pipe(minifyCss())
     .pipe(sourcemaps.write())

@@ -95,6 +95,7 @@ header p {
 .settings-area {
 	float: left;
 	max-width: 600px;
+	color: white;
 }
 
 .form-group {
@@ -305,7 +306,7 @@ a.edit {
 	width: 32px;
 	height: 32px;
 	background-color: transparent;
-	border: none;
+	border: white;
 }
 
 #search-bar-container button .icon {

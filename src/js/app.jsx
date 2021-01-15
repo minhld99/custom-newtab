@@ -84,42 +84,40 @@ var Settings = React.createClass({
 
     toggleCssStyle: function() {
         if (this.state.darkTheme != true) {
-            $("body").css('background', 'white');
-            $("section").css('color', 'black');
-            $("input[type='text']").css('color', 'black');
-            $("input[type='text']:hover, input[type='text']:focus").css('border-color', "black");
-            $("header").css('color', 'black');
-            $(".form-group").css('border-left', '2px solid black');
-            $(".form-group-seamless").css('border', 'none');
-            $("a.button").css('color', 'black');
-            $("a.button:hover").css('color', 'white', 'background', 'black');
-            $("select").css('border', '2px solid black');
-            $("select").css('color', 'black');
-            $("hr").css('background', 'black');
-            $("a.edit").css('color', 'black');
-            $(".onoffswitch-inner:before, .onoffswitch-inner:after").css('color', 'black');
-            $("onoffswitch-inner:before").css('border', 'white');
-            $(".onoffswitch-inner:after").css('border', 'white');
-            $(".onoffswitch-switch").css('color', 'white');
+            $('link[href="src/dist/dark.css"]').attr('href','src/dist/light.css');
+            // $("body").css('background', 'white');
+            // $("section").css('color', 'black');
+            // $("input[type='text']").css('color', 'black');
+            // $("input[type='text']:hover, input[type='text']:focus").css('border-color', "black");
+            // $("header").css('color', 'black');
+            // $(".form-group").css('border-left', '2px solid black');
+            // $(".form-group-seamless").css('border', 'none');
+            // $("a.button").css('color', 'black');
+            // $("a.button:hover").css('color', 'white', 'background', 'black');
+            // $("select").css('border', '2px solid black');
+            // $("select").css('color', 'black');
+            // $("hr").css('background', 'black');
+            // $("a.edit").css('color', 'black');
+            // $(".onoffswitch-inner:before, .onoffswitch-inner:after").css('color', 'black');
+            // $(".onoffswitch-switch").css('color', 'white');
         }
         else {
-            $("body").css('background', 'black');
-            $("section").css('color', 'white');
-            $("input[type='text']").css('color', 'white');
-            $("input[type='text']:hover, input[type='text']:focus").css('border-color', "white");
-            $("header").css('color', 'white');
-            $(".form-group").css('border-left', '2px solid white');
-            $(".form-group-seamless").css('border', 'none');
-            $("a.button").css('color', 'white');
-            $("a.button:hover").css('color', 'white', 'background', 'white');
-            $("select").css('border', '2px solid white');
-            $("select").css('color', 'white');
-            $("hr").css('background', 'white');
-            $("a.edit").css('color', 'white');
-            $(".onoffswitch-inner:before, .onoffswitch-inner:after").css('color', 'white');
-            $("onoffswitch-inner:before").css('border', 'black');
-            $(".onoffswitch-inner:after").css('border', 'black');
-            $(".onoffswitch-switch").css('color', 'black');
+            $('link[href="src/dist/light.css"]').attr('href','src/dist/dark.css');
+            // $("body").css('background', 'black');
+            // $("section").css('color', 'white');
+            // $("input[type='text']").css('color', 'white');
+            // $("input[type='text']:hover, input[type='text']:focus").css('border-color', "white");
+            // $("header").css('color', 'white');
+            // $(".form-group").css('border-left', '2px solid white');
+            // $(".form-group-seamless").css('border', 'none');
+            // $("a.button").css('color', 'white');
+            // $("a.button:hover").css('color', 'white', 'background', 'white');
+            // $("select").css('border', '2px solid white');
+            // $("select").css('color', 'white');
+            // $("hr").css('background', 'white');
+            // $("a.edit").css('color', 'white');
+            // $(".onoffswitch-inner:before, .onoffswitch-inner:after").css('color', 'white');
+            // $(".onoffswitch-switch").css('color', 'black');
         }
     },
 
@@ -202,7 +200,7 @@ var Settings = React.createClass({
                         </div>
                     </div>
                 </section>
-                <section>
+                <section className="settings-area">
                     <h3>Actions / Quẩy thui</h3>
                     <div className="form-group">
                         <a href="#" className="button" onClick={this.handleClick}>Save / Lưu</a>

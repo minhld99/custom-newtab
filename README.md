@@ -34,5 +34,5 @@ You will also see any errors in the browser console.
   - [x] Allow settings change.
   - [x] Toggle theme (Dark, Light)
   - [ ] Add lunar calendar
-  - [ ] Add demo
+  - [x] Add demo
   - [x] Make it available on Github pages

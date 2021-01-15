@@ -1,7 +1,8 @@
-# Custom newtab with calendar
+# Custom newtab <strike>(with calendar)<strike/>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
-Demo is available at [https://minhld99.github.io/custom-newtab](https://minhld99.github.io/custom-newtab).
+Demo is available at
+<a href="https://minhld99.github.io/custom-newtab" target="_blank">https://minhld99.github.io/custom-newtab</a>.
 
 ## Available Scripts
 

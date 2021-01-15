@@ -42267,11 +42267,13 @@ var Settings = React.createClass({displayName: "Settings",
                     React.createElement("div", {className: "form-group"}, 
                         React.createElement("div", {className: "form-item"}, 
                             React.createElement("label", {htmlFor: "name"}, "Your name / Tên bạn"), 
-                            React.createElement("input", {id: "name", value: this.state.name, onChange: this.handleChange, placeholder: "Your name.", type: "text"})
+                            React.createElement("input", {id: "name", value: this.state.name, onChange: this.handleChange, 
+                                placeholder: "Your name.", type: "text"})
                         ), 
                         React.createElement("div", {className: "form-item form-space-after"}, 
                             React.createElement("label", {htmlFor: "city"}, "Location / Địa chỉ"), 
-                            React.createElement("input", {id: "city", value: this.state.city, onChange: this.handleChange, placeholder: "City to provide a forecast for.", type: "text"})
+                            React.createElement("input", {id: "city", value: this.state.city, onChange: this.handleChange, 
+                                placeholder: "City to provide a forecast for.", type: "text"})
                         )
                     )
                 ), 
@@ -42282,8 +42284,10 @@ var Settings = React.createClass({displayName: "Settings",
                         React.createElement("div", {className: "form-item form-space-after"}, 
                             React.createElement("label", {htmlFor: "showWeather"}, "Show Weather / Hiện thời tiết"), 
                             React.createElement("div", {className: "onoffswitch"}, 
-                                React.createElement("input", {className: "onoffswitch-checkbox", id: "showWeather", checked: this.state.showWeather, type: "checkbox"}), 
-                                React.createElement("label", {onClick: this.toggleWeather, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
+                                React.createElement("input", {className: "onoffswitch-checkbox", id: "showWeather", 
+                                    checked: this.state.showWeather, type: "checkbox"}), 
+                                React.createElement("label", {onClick: this.toggleWeather, className: "onoffswitch-label", 
+                                    htmlFor: "myonoffswitch"}, 
                                     React.createElement("span", {className: "onoffswitch-inner"}), 
                                     React.createElement("span", {className: "onoffswitch-switch"})
                                 )
@@ -42292,8 +42296,10 @@ var Settings = React.createClass({displayName: "Settings",
                         React.createElement("div", {className: "form-item form-space-after"}, 
                             React.createElement("label", {htmlFor: "showTemperature"}, "Show Forecast / Dự báo thời tiết"), 
                             React.createElement("div", {className: "onoffswitch"}, 
-                                React.createElement("input", {className: "onoffswitch-checkbox", id: "showTemperature", checked: this.state.showTemperature, type: "checkbox"}), 
-                                React.createElement("label", {onClick: this.toggleTemperature, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
+                                React.createElement("input", {className: "onoffswitch-checkbox", id: "showTemperature", 
+                                    checked: this.state.showTemperature, type: "checkbox"}), 
+                                React.createElement("label", {onClick: this.toggleTemperature, className: "onoffswitch-label", 
+                                    htmlFor: "myonoffswitch"}, 
                                     React.createElement("span", {className: "onoffswitch-inner"}), 
                                     React.createElement("span", {className: "onoffswitch-switch"})
                                 )
@@ -42366,11 +42372,12 @@ var Background = React.createClass({displayName: "Background",
         }.bind(this));
     },
 
-    // render loop
     setTimer: function() {
         this.setInterval(
-          function () { this.initImage(); }.bind(this),
-          this.state.delay
+            function () { 
+                this.initImage(); 
+            }.bind(this),
+            this.state.delay
         );
     },
 
@@ -42384,7 +42391,11 @@ var Background = React.createClass({displayName: "Background",
     },
 
     randomImage : function() {
-        var imgSrc = "https://res.cloudinary.com/minhld/image/upload/c_scale,g_center,h_" + (window.screen.height-100) + ",w_" + window.screen.width + "/v1609858465/newtab/" + this.random() + ".png";
+        var imgSrc = "https://res.cloudinary.com/minhld/image/upload/c_scale,g_center,h_" 
+        + (window.screen.height-100) 
+        + ",w_" + window.screen.width 
+        + "/v1609858465/newtab/" 
+        + this.random() + ".png";
         return imgSrc;
     },
 
@@ -42470,7 +42481,6 @@ var Weather = React.createClass({displayName: "Weather",
     },
 
     setTimer: function() {
-
         this.getWeather();
         this.setInterval(
           function () { this.getWeather(); }.bind(this),
@@ -42530,7 +42540,6 @@ var Weather = React.createClass({displayName: "Weather",
         if (userData.city.toLowerCase() == 'auto')
         {
             //TODO: Save the current position instead of polling it constantly
-
             navigator.geolocation.getCurrentPosition(function (loc) {console.log(loc)}, function () {}, {});
             //The working next statement.
             navigator.geolocation.getCurrentPosition(function (loc) {

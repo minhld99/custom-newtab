@@ -1,4 +1,4 @@
-# Custom newtab <strike>(with calendar)<strike/>
+# Custom newtab <strike>(with calendar)</strike>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
 Demo is available at

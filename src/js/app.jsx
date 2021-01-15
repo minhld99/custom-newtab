@@ -38,7 +38,8 @@ var Settings = React.createClass({
             showWeather: true,
             showTemperature: true,
             showWindSpeed: false,
-            darkTheme: true
+            isDarkTheme: true,
+            isEnglish: true,
         };
     },
 
@@ -60,7 +61,8 @@ var Settings = React.createClass({
             showWeather: event.target.id == 'showWeather' ?  event.target.checked : this.state.showWeather,
             showTemperature: event.target.id == 'showTemperature' ?  event.target.checked : this.state.showTemperature,
             showWindSpeed: event.target.id == 'showWindSpeed' ?  event.target.checked : this.state.showWindSpeed,
-            darkTheme: event.target.id == 'darkTheme' ?  event.target.checked : this.state.darkTheme,
+            isDarkTheme: event.target.id == 'isDarkTheme' ?  event.target.checked : this.state.isDarkTheme,
+            isEnglish: event.target.id == 'isEnglish' ? event.target.checked : this.state.isEnglish,
         };
 
         this.setState(data);
@@ -78,12 +80,16 @@ var Settings = React.createClass({
         this.setState({showWindSpeed: !this.state.showWindSpeed});
     },
 
-    toggleDarkTheme: function() {
-        this.setState({darkTheme: !this.state.darkTheme}, this.toggleCssStyle);
+    toggleTheme: function() {
+        this.setState({isDarkTheme: !this.state.isDarkTheme}, this.toggleCssStyle);
+    },
+
+    toggleLanguage: function() {
+        this.setState({isEnglish: !this.state.isEnglish});
     },
 
     toggleCssStyle: function() {
-        if (this.state.darkTheme != true) {
+        if (this.state.isDarkTheme != true) {
             $('link[href="src/dist/dark.css"]').attr('href','src/dist/light.css');
             // $("body").css('background', 'white');
             // $("section").css('color', 'black');
@@ -122,92 +128,197 @@ var Settings = React.createClass({
     },
 
     render: function() {
-        console.log('this.state.darkTheme = ' + this.state.darkTheme)
-
-        return (
-            <div id="settings">
-                <header>
-                    <h2>Settings / Cài đặt</h2>
-                    <p className="lead">You may use the fields below to personalize your NewTab.</p>
-                    <p className="lead">Thay đổi các mục sau đây theo ý thích của bạn.</p>
-                    <hr/>
-                </header>
-                <section className="settings-area">
-                    <h3>Basic / Cơ bản</h3>
-                    <div className="form-group">
-                        <div className="form-item">
-                            <label htmlFor="name">Your name / Tên bạn</label>
-                            <input id="name" value={this.state.name} onChange={this.handleChange} 
-                                placeholder="Your name." type="text"/>
-                        </div>
-                        <div className="form-item form-space-after">
-                            <label htmlFor="city">Location / Địa chỉ</label>
-                            <input id="city" value={this.state.city} onChange={this.handleChange} 
-                                placeholder="City to provide a forecast for." type="text"/>
-                        </div>
-                    </div>
-                </section>
-                <section className="settings-area">
-                    <h3>Options / Các lựa chọn</h3>
-                    <div className="form-group">
-                        <h4>Weather / Thời tiết</h4>
-                        <div className="form-item form-space-after">
-                            <label htmlFor="showWeather">Show Weather / Hiện thời tiết</label>
-                            <div className="onoffswitch">
-                                <input className="onoffswitch-checkbox" id="showWeather" 
-                                    checked={this.state.showWeather} type="checkbox"/>
-                                <label onClick={this.toggleWeather} className="onoffswitch-label" 
-                                    htmlFor="myonoffswitch">
-                                    <span className="onoffswitch-inner"></span>
-                                    <span className="onoffswitch-switch"></span>
-                                </label>
+        // console.log('this.state.isDarkTheme = ' + this.state.isDarkTheme)
+        if (this.state.isEnglish) {
+            return (
+                <div id="settings">
+                    <header>
+                        <h1>Settings</h1>
+                        <p className="lead">You may use the fields below to personalize your NewTab.</p>
+                        <hr/>
+                    </header>
+                    <section className="settings-area">
+                        <h2>Basic</h2>
+                        <div className="form-group">
+                            <div className="form-item">
+                                <label htmlFor="name">Your name</label>
+                                <input id="name" value={this.state.name} onChange={this.handleChange} 
+                                    placeholder="Your name." type="text"/>
+                            </div>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="city">Location</label>
+                                <input id="city" value={this.state.city} onChange={this.handleChange} 
+                                    placeholder="City to provide a forecast for." type="text"/>
                             </div>
                         </div>
-                        <div className="form-item form-space-after">
-                            <label htmlFor="showTemperature">Show Forecast / Dự báo thời tiết</label>
-                            <div className="onoffswitch">
-                                <input className="onoffswitch-checkbox" id="showTemperature" 
-                                    checked={this.state.showTemperature} type="checkbox"/>
-                                <label onClick={this.toggleTemperature} className="onoffswitch-label" 
-                                    htmlFor="myonoffswitch">
-                                    <span className="onoffswitch-inner"></span>
-                                    <span className="onoffswitch-switch"></span>
-                                </label>
+                    </section>
+                    <section className="settings-area">
+                        <h2>Options</h2>
+                        <div className="form-group">
+                            <h3>Weather</h3>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="showWeather">Show Weather</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="showWeather" 
+                                        checked={this.state.showWeather} type="checkbox"/>
+                                    <label onClick={this.toggleWeather} className="onoffswitch-label" 
+                                        htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="showTemperature">Show Forecast</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="showTemperature" 
+                                        checked={this.state.showTemperature} type="checkbox"/>
+                                    <label onClick={this.toggleTemperature} className="onoffswitch-label" 
+                                        htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-item">
+                                <label htmlFor="showWindSpeed">Show Wind Speed</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="showWindSpeed" checked={this.state.showWindSpeed} type="checkbox"/>
+                                    <label onClick={this.toggleWindSpeed} className="onoffswitch-label" htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                        <div className="form-item">
-                            <label htmlFor="showWindSpeed">Show Wind Speed / Sức gió</label>
-                            <div className="onoffswitch">
-                                <input className="onoffswitch-checkbox" id="showWindSpeed" checked={this.state.showWindSpeed} type="checkbox"/>
-                                <label onClick={this.toggleWindSpeed} className="onoffswitch-label" htmlFor="myonoffswitch">
-                                    <span className="onoffswitch-inner"></span>
-                                    <span className="onoffswitch-switch"></span>
-                                </label>
+                        <div className="form-group form-group-seamless">
+                            <h3>General</h3>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="isDarkTheme">Theme</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="isDarkTheme" checked={this.state.isDarkTheme} type="checkbox"/>
+                                    <label onClick={this.toggleTheme} className="onoffswitch-label" htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner onoffswitch-theme-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="isEnglish">Language</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="isEnglish" checked={this.state.isEnglish} type="checkbox"/>
+                                    <label onClick={this.toggleLanguage} className="onoffswitch-label" htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner onoffswitch-language-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="form-group form-group-seamless">
-                        <h4>General / Tổng quan</h4>
-                        <div className="form-item form-space-after">
-                            <label htmlFor="darkTheme">Theme / Nền</label>
-                            <div className="onoffswitch">
-                                <input className="onoffswitch-checkbox" id="darkTheme" checked={this.state.darkTheme} type="checkbox"/>
-                                <label onClick={this.toggleDarkTheme} className="onoffswitch-label" htmlFor="myonoffswitch">
-                                    <span className="onoffswitch-inner onoffswitch-theme-inner">{this.toggleCssStyle}</span>
-                                    <span className="onoffswitch-switch"></span>
-                                </label>
+                    </section>
+                    <section className="settings-area">
+                        <h2>Actions</h2>
+                        <div className="form-group">
+                            <a href="#" className="button" onClick={this.handleClick}>Save</a>
+                        </div>
+                    </section>
+                </div>
+            );
+        }
+        else {
+            return (
+                <div id="settings">
+                    <header>
+                        <h1>Cài đặt</h1>
+                        <p className="lead">Thay đổi các mục sau đây theo ý thích của bạn.</p>
+                        <hr/>
+                    </header>
+                    <section className="settings-area">
+                        <h2>Cơ bản</h2>
+                        <div className="form-group">
+                            <div className="form-item">
+                                <label htmlFor="name">Tên bạn</label>
+                                <input id="name" value={this.state.name} onChange={this.handleChange} 
+                                    placeholder="Your name." type="text"/>
+                            </div>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="city">Địa chỉ</label>
+                                <input id="city" value={this.state.city} onChange={this.handleChange} 
+                                    placeholder="City to provide a forecast for." type="text"/>
                             </div>
                         </div>
-                    </div>
-                </section>
-                <section className="settings-area">
-                    <h3>Actions / Quẩy thui</h3>
-                    <div className="form-group">
-                        <a href="#" className="button" onClick={this.handleClick}>Save / Lưu</a>
-                    </div>
-                </section>
-            </div>
-        );
+                    </section>
+                    <section className="settings-area">
+                        <h2>Các lựa chọn</h2>
+                        <div className="form-group">
+                            <h3>Thời tiết</h3>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="showWeather">Hiện thời tiết</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="showWeather" 
+                                        checked={this.state.showWeather} type="checkbox"/>
+                                    <label onClick={this.toggleWeather} className="onoffswitch-label" 
+                                        htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="showTemperature">Dự báo thời tiết</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="showTemperature" 
+                                        checked={this.state.showTemperature} type="checkbox"/>
+                                    <label onClick={this.toggleTemperature} className="onoffswitch-label" 
+                                        htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-item">
+                                <label htmlFor="showWindSpeed">Hiển thị sức gió</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="showWindSpeed" checked={this.state.showWindSpeed} type="checkbox"/>
+                                    <label onClick={this.toggleWindSpeed} className="onoffswitch-label" htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="form-group form-group-seamless">
+                            <h3>Tổng quan</h3>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="isDarkTheme">Nền</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="isDarkTheme" checked={this.state.isDarkTheme} type="checkbox"/>
+                                    <label onClick={this.toggleTheme} className="onoffswitch-label" htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner onoffswitch-theme-inner">{this.toggleCssStyle}</span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div className="form-item form-space-after">
+                                <label htmlFor="isEnglish">Ngôn ngữ</label>
+                                <div className="onoffswitch">
+                                    <input className="onoffswitch-checkbox" id="isEnglish" checked={this.state.isEnglish} type="checkbox"/>
+                                    <label onClick={this.toggleLanguage} className="onoffswitch-label" htmlFor="myonoffswitch">
+                                        <span className="onoffswitch-inner onoffswitch-language-inner"></span>
+                                        <span className="onoffswitch-switch"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section className="settings-area">
+                        <h2>Quẩy thui</h2>
+                        <div className="form-group">
+                            <a href="#" className="button" onClick={this.handleClick}>Lưu</a>
+                        </div>
+                    </section>
+                </div>
+            );
+        }
     }
 });
 
@@ -311,13 +422,25 @@ var Clock = React.createClass({
     },
 
     render: function() {
-        return (
-            <div id="clock">
-                <div id="dial">{this.state.currentTime}</div>
-                <span id="greeting">Hello / Chào {this.props.name}</span> <Link className="edit" to={'/settings'}>(settings)</Link>
-            </div>
-
-        );
+        var userData = getData("user");
+        if (userData.isEnglish) {
+            return (
+                <div id="clock">
+                    <div id="dial">{this.state.currentTime}</div>
+                    <span id="greeting">Hello {this.props.name}</span> <Link className="edit" to={'/settings'}>(settings)</Link>
+                </div>
+    
+            );
+        }
+        else {
+            return (
+                <div id="clock">
+                    <div id="dial">{this.state.currentTime}</div>
+                    <span id="greeting">Chào {this.props.name}</span> <Link className="edit" to={'/settings'}>(cài đặt)</Link>
+                </div>
+    
+            );
+        }
     }
 })
 
@@ -466,32 +589,63 @@ var Weather = React.createClass({
     },
 
     getWindText: function(ms) {
-        if (ms >= 12)
-            return 'Siêu bão';
-        if (ms >= 11)
-            return 'Gió bão cực mạnh';
-        if (ms >= 10)
-            return 'Gió bão dữ dội';
-        if (ms >= 9)
-            return 'Gió bão';
-        if (ms >= 8)
-            return 'Gió rất mạnh';
-        if (ms >= 7)
-            return 'Gió mạnh hơn';
-        if (ms >= 6)
-            return 'Gió mạnh';
-        if (ms >= 5)
-            return 'Gió mạnh vừa phải';
-        if (ms >= 4)
-            return 'Gió vừa phải';
-        if (ms >= 3)
-            return 'Gió nhẹ';
-        if (ms >= 2)
-            return 'Gió nhẹ vừa phải';
-        if (ms >= 1)
-            return 'Gió rất nhẹ';
-        if (ms >= 0)
-            return 'Êm đềm';
+        var userData = getData("user");
+        if (userData.isEnglish) {
+            if (ms >= 12)
+                return 'Hurricane force';
+            if (ms >= 11)
+                return 'Violent storm';
+            if (ms >= 10)
+                return 'Whole gale';
+            if (ms >= 9)
+                return 'Severe gale';
+            if (ms >= 8)
+                return 'Gale';
+            if (ms >= 7)
+                return 'Moderate gale';
+            if (ms >= 6)
+                return 'Strong breeze';
+            if (ms >= 5)
+                return 'Fresh breeze';
+            if (ms >= 4)
+                return 'Moderate breeze';
+            if (ms >= 3)
+                return 'Gentle breeze';
+            if (ms >= 2)
+                return 'Light breeze';
+            if (ms >= 1)
+                return 'Light air';
+            if (ms >= 0)
+                return 'Calm';
+        }
+        else {
+            if (ms >= 12)
+                return 'Siêu bão';
+            if (ms >= 11)
+                return 'Gió bão cực mạnh';
+            if (ms >= 10)
+                return 'Gió bão dữ dội';
+            if (ms >= 9)
+                return 'Gió bão';
+            if (ms >= 8)
+                return 'Gió rất mạnh';
+            if (ms >= 7)
+                return 'Gió mạnh hơn';
+            if (ms >= 6)
+                return 'Gió mạnh';
+            if (ms >= 5)
+                return 'Gió mạnh vừa phải';
+            if (ms >= 4)
+                return 'Gió vừa phải';
+            if (ms >= 3)
+                return 'Gió nhẹ';
+            if (ms >= 2)
+                return 'Gió nhẹ vừa phải';
+            if (ms >= 1)
+                return 'Gió rất nhẹ';
+            if (ms >= 0)
+                return 'Êm đềm';
+        }
     },
 
     render: function() {
@@ -557,7 +711,7 @@ var App = React.createClass({
 
     render: function() {
         var storedData = getData(this.state.storageId);
-        let name = "Google";
+        let engine = "Google";
         let action = "https://google.com/search";
         const icon = `https://external-content.duckduckgo.com/ip3/${
             action.split("://")[1].split("/")[0]
@@ -579,11 +733,12 @@ var App = React.createClass({
                             <input
                                 autoFocus
                                 type="text"
-                                placeholder={`Search ${name} or type a URL`}
+                                name="q"
+                                placeholder={`Search ${engine} or type a URL`}
                                 autoComplete="off"
                             />
                             <button type="submit">
-                                <img src={icon} className="icon" alt={`${name} icon`} />
+                                <img src={icon} className="icon" alt={`${engine} icon`} />
                             </button>
                         </form>
                     </center>

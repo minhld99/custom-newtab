@@ -34,7 +34,7 @@ input[type='text']:hover, input[type='text']:focus {
 
 
 h1 {
-	font-size: 72px;
+	font-size: 60px;
 }
 
 #loading {
@@ -291,6 +291,15 @@ a.edit {
 .onoffswitch-theme-inner:after {
 	color: white;
 	content: 'LIGHT' !important;
+}
+
+.onoffswitch-language-inner:before {
+    content: 'EN' !important;
+}
+
+.onoffswitch-language-inner:after {
+    color: white;
+    content: 'VI' !important;
 }
 
 #search-bar-container {

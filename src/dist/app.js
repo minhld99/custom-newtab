@@ -42166,7 +42166,8 @@ var Settings = React.createClass({displayName: "Settings",
             showWeather: true,
             showTemperature: true,
             showWindSpeed: false,
-            darkTheme: true
+            isDarkTheme: true,
+            isEnglish: true,
         };
     },
 
@@ -42188,7 +42189,8 @@ var Settings = React.createClass({displayName: "Settings",
             showWeather: event.target.id == 'showWeather' ?  event.target.checked : this.state.showWeather,
             showTemperature: event.target.id == 'showTemperature' ?  event.target.checked : this.state.showTemperature,
             showWindSpeed: event.target.id == 'showWindSpeed' ?  event.target.checked : this.state.showWindSpeed,
-            darkTheme: event.target.id == 'darkTheme' ?  event.target.checked : this.state.darkTheme,
+            isDarkTheme: event.target.id == 'isDarkTheme' ?  event.target.checked : this.state.isDarkTheme,
+            isEnglish: event.target.id == 'isEnglish' ? event.target.checked : this.state.isEnglish,
         };
 
         this.setState(data);
@@ -42206,12 +42208,16 @@ var Settings = React.createClass({displayName: "Settings",
         this.setState({showWindSpeed: !this.state.showWindSpeed});
     },
 
-    toggleDarkTheme: function() {
-        this.setState({darkTheme: !this.state.darkTheme}, this.toggleCssStyle);
+    toggleTheme: function() {
+        this.setState({isDarkTheme: !this.state.isDarkTheme}, this.toggleCssStyle);
+    },
+
+    toggleLanguage: function() {
+        this.setState({isEnglish: !this.state.isEnglish});
     },
 
     toggleCssStyle: function() {
-        if (this.state.darkTheme != true) {
+        if (this.state.isDarkTheme != true) {
             $('link[href="src/dist/dark.css"]').attr('href','src/dist/light.css');
             // $("body").css('background', 'white');
             // $("section").css('color', 'black');
@@ -42250,92 +42256,197 @@ var Settings = React.createClass({displayName: "Settings",
     },
 
     render: function() {
-        console.log('this.state.darkTheme = ' + this.state.darkTheme)
-
-        return (
-            React.createElement("div", {id: "settings"}, 
-                React.createElement("header", null, 
-                    React.createElement("h2", null, "Settings / Cài đặt"), 
-                    React.createElement("p", {className: "lead"}, "You may use the fields below to personalize your NewTab."), 
-                    React.createElement("p", {className: "lead"}, "Thay đổi các mục sau đây theo ý thích của bạn."), 
-                    React.createElement("hr", null)
-                ), 
-                React.createElement("section", {className: "settings-area"}, 
-                    React.createElement("h3", null, "Basic / Cơ bản"), 
-                    React.createElement("div", {className: "form-group"}, 
-                        React.createElement("div", {className: "form-item"}, 
-                            React.createElement("label", {htmlFor: "name"}, "Your name / Tên bạn"), 
-                            React.createElement("input", {id: "name", value: this.state.name, onChange: this.handleChange, 
-                                placeholder: "Your name.", type: "text"})
-                        ), 
-                        React.createElement("div", {className: "form-item form-space-after"}, 
-                            React.createElement("label", {htmlFor: "city"}, "Location / Địa chỉ"), 
-                            React.createElement("input", {id: "city", value: this.state.city, onChange: this.handleChange, 
-                                placeholder: "City to provide a forecast for.", type: "text"})
+        // console.log('this.state.isDarkTheme = ' + this.state.isDarkTheme)
+        if (this.state.isEnglish) {
+            return (
+                React.createElement("div", {id: "settings"}, 
+                    React.createElement("header", null, 
+                        React.createElement("h1", null, "Settings"), 
+                        React.createElement("p", {className: "lead"}, "You may use the fields below to personalize your NewTab."), 
+                        React.createElement("hr", null)
+                    ), 
+                    React.createElement("section", {className: "settings-area"}, 
+                        React.createElement("h2", null, "Basic"), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("div", {className: "form-item"}, 
+                                React.createElement("label", {htmlFor: "name"}, "Your name"), 
+                                React.createElement("input", {id: "name", value: this.state.name, onChange: this.handleChange, 
+                                    placeholder: "Your name.", type: "text"})
+                            ), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "city"}, "Location"), 
+                                React.createElement("input", {id: "city", value: this.state.city, onChange: this.handleChange, 
+                                    placeholder: "City to provide a forecast for.", type: "text"})
+                            )
                         )
-                    )
-                ), 
-                React.createElement("section", {className: "settings-area"}, 
-                    React.createElement("h3", null, "Options / Các lựa chọn"), 
-                    React.createElement("div", {className: "form-group"}, 
-                        React.createElement("h4", null, "Weather / Thời tiết"), 
-                        React.createElement("div", {className: "form-item form-space-after"}, 
-                            React.createElement("label", {htmlFor: "showWeather"}, "Show Weather / Hiện thời tiết"), 
-                            React.createElement("div", {className: "onoffswitch"}, 
-                                React.createElement("input", {className: "onoffswitch-checkbox", id: "showWeather", 
-                                    checked: this.state.showWeather, type: "checkbox"}), 
-                                React.createElement("label", {onClick: this.toggleWeather, className: "onoffswitch-label", 
-                                    htmlFor: "myonoffswitch"}, 
-                                    React.createElement("span", {className: "onoffswitch-inner"}), 
-                                    React.createElement("span", {className: "onoffswitch-switch"})
+                    ), 
+                    React.createElement("section", {className: "settings-area"}, 
+                        React.createElement("h2", null, "Options"), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("h3", null, "Weather"), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "showWeather"}, "Show Weather"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "showWeather", 
+                                        checked: this.state.showWeather, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleWeather, className: "onoffswitch-label", 
+                                        htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
+                                )
+                            ), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "showTemperature"}, "Show Forecast"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "showTemperature", 
+                                        checked: this.state.showTemperature, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleTemperature, className: "onoffswitch-label", 
+                                        htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
+                                )
+                            ), 
+                            React.createElement("div", {className: "form-item"}, 
+                                React.createElement("label", {htmlFor: "showWindSpeed"}, "Show Wind Speed"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "showWindSpeed", checked: this.state.showWindSpeed, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleWindSpeed, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
                                 )
                             )
                         ), 
-                        React.createElement("div", {className: "form-item form-space-after"}, 
-                            React.createElement("label", {htmlFor: "showTemperature"}, "Show Forecast / Dự báo thời tiết"), 
-                            React.createElement("div", {className: "onoffswitch"}, 
-                                React.createElement("input", {className: "onoffswitch-checkbox", id: "showTemperature", 
-                                    checked: this.state.showTemperature, type: "checkbox"}), 
-                                React.createElement("label", {onClick: this.toggleTemperature, className: "onoffswitch-label", 
-                                    htmlFor: "myonoffswitch"}, 
-                                    React.createElement("span", {className: "onoffswitch-inner"}), 
-                                    React.createElement("span", {className: "onoffswitch-switch"})
+                        React.createElement("div", {className: "form-group form-group-seamless"}, 
+                            React.createElement("h3", null, "General"), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "isDarkTheme"}, "Theme"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "isDarkTheme", checked: this.state.isDarkTheme, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleTheme, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner onoffswitch-theme-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
                                 )
-                            )
-                        ), 
-                        React.createElement("div", {className: "form-item"}, 
-                            React.createElement("label", {htmlFor: "showWindSpeed"}, "Show Wind Speed / Sức gió"), 
-                            React.createElement("div", {className: "onoffswitch"}, 
-                                React.createElement("input", {className: "onoffswitch-checkbox", id: "showWindSpeed", checked: this.state.showWindSpeed, type: "checkbox"}), 
-                                React.createElement("label", {onClick: this.toggleWindSpeed, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
-                                    React.createElement("span", {className: "onoffswitch-inner"}), 
-                                    React.createElement("span", {className: "onoffswitch-switch"})
+                            ), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "isEnglish"}, "Language"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "isEnglish", checked: this.state.isEnglish, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleLanguage, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner onoffswitch-language-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
                                 )
                             )
                         )
                     ), 
-                    React.createElement("div", {className: "form-group form-group-seamless"}, 
-                        React.createElement("h4", null, "General / Tổng quan"), 
-                        React.createElement("div", {className: "form-item form-space-after"}, 
-                            React.createElement("label", {htmlFor: "darkTheme"}, "Theme / Nền"), 
-                            React.createElement("div", {className: "onoffswitch"}, 
-                                React.createElement("input", {className: "onoffswitch-checkbox", id: "darkTheme", checked: this.state.darkTheme, type: "checkbox"}), 
-                                React.createElement("label", {onClick: this.toggleDarkTheme, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
-                                    React.createElement("span", {className: "onoffswitch-inner onoffswitch-theme-inner"}, this.toggleCssStyle), 
-                                    React.createElement("span", {className: "onoffswitch-switch"})
+                    React.createElement("section", {className: "settings-area"}, 
+                        React.createElement("h2", null, "Actions"), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("a", {href: "#", className: "button", onClick: this.handleClick}, "Save")
+                        )
+                    )
+                )
+            );
+        }
+        else {
+            return (
+                React.createElement("div", {id: "settings"}, 
+                    React.createElement("header", null, 
+                        React.createElement("h1", null, "Cài đặt"), 
+                        React.createElement("p", {className: "lead"}, "Thay đổi các mục sau đây theo ý thích của bạn."), 
+                        React.createElement("hr", null)
+                    ), 
+                    React.createElement("section", {className: "settings-area"}, 
+                        React.createElement("h2", null, "Cơ bản"), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("div", {className: "form-item"}, 
+                                React.createElement("label", {htmlFor: "name"}, "Tên bạn"), 
+                                React.createElement("input", {id: "name", value: this.state.name, onChange: this.handleChange, 
+                                    placeholder: "Your name.", type: "text"})
+                            ), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "city"}, "Địa chỉ"), 
+                                React.createElement("input", {id: "city", value: this.state.city, onChange: this.handleChange, 
+                                    placeholder: "City to provide a forecast for.", type: "text"})
+                            )
+                        )
+                    ), 
+                    React.createElement("section", {className: "settings-area"}, 
+                        React.createElement("h2", null, "Các lựa chọn"), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("h3", null, "Thời tiết"), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "showWeather"}, "Hiện thời tiết"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "showWeather", 
+                                        checked: this.state.showWeather, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleWeather, className: "onoffswitch-label", 
+                                        htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
+                                )
+                            ), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "showTemperature"}, "Dự báo thời tiết"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "showTemperature", 
+                                        checked: this.state.showTemperature, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleTemperature, className: "onoffswitch-label", 
+                                        htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
+                                )
+                            ), 
+                            React.createElement("div", {className: "form-item"}, 
+                                React.createElement("label", {htmlFor: "showWindSpeed"}, "Hiển thị sức gió"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "showWindSpeed", checked: this.state.showWindSpeed, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleWindSpeed, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
+                                )
+                            )
+                        ), 
+                        React.createElement("div", {className: "form-group form-group-seamless"}, 
+                            React.createElement("h3", null, "Tổng quan"), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "isDarkTheme"}, "Nền"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "isDarkTheme", checked: this.state.isDarkTheme, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleTheme, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner onoffswitch-theme-inner"}, this.toggleCssStyle), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
+                                )
+                            ), 
+                            React.createElement("div", {className: "form-item form-space-after"}, 
+                                React.createElement("label", {htmlFor: "isEnglish"}, "Ngôn ngữ"), 
+                                React.createElement("div", {className: "onoffswitch"}, 
+                                    React.createElement("input", {className: "onoffswitch-checkbox", id: "isEnglish", checked: this.state.isEnglish, type: "checkbox"}), 
+                                    React.createElement("label", {onClick: this.toggleLanguage, className: "onoffswitch-label", htmlFor: "myonoffswitch"}, 
+                                        React.createElement("span", {className: "onoffswitch-inner onoffswitch-language-inner"}), 
+                                        React.createElement("span", {className: "onoffswitch-switch"})
+                                    )
                                 )
                             )
                         )
-                    )
-                ), 
-                React.createElement("section", {className: "settings-area"}, 
-                    React.createElement("h3", null, "Actions / Quẩy thui"), 
-                    React.createElement("div", {className: "form-group"}, 
-                        React.createElement("a", {href: "#", className: "button", onClick: this.handleClick}, "Save / Lưu")
+                    ), 
+                    React.createElement("section", {className: "settings-area"}, 
+                        React.createElement("h2", null, "Quẩy thui"), 
+                        React.createElement("div", {className: "form-group"}, 
+                            React.createElement("a", {href: "#", className: "button", onClick: this.handleClick}, "Lưu")
+                        )
                     )
                 )
-            )
-        );
+            );
+        }
     }
 });
 
@@ -42439,13 +42550,25 @@ var Clock = React.createClass({displayName: "Clock",
     },
 
     render: function() {
-        return (
-            React.createElement("div", {id: "clock"}, 
-                React.createElement("div", {id: "dial"}, this.state.currentTime), 
-                React.createElement("span", {id: "greeting"}, "Hello / Chào ", this.props.name), " ", React.createElement(Link, {className: "edit", to: '/settings'}, "(settings)")
-            )
-
-        );
+        var userData = getData("user");
+        if (userData.isEnglish) {
+            return (
+                React.createElement("div", {id: "clock"}, 
+                    React.createElement("div", {id: "dial"}, this.state.currentTime), 
+                    React.createElement("span", {id: "greeting"}, "Hello ", this.props.name), " ", React.createElement(Link, {className: "edit", to: '/settings'}, "(settings)")
+                )
+    
+            );
+        }
+        else {
+            return (
+                React.createElement("div", {id: "clock"}, 
+                    React.createElement("div", {id: "dial"}, this.state.currentTime), 
+                    React.createElement("span", {id: "greeting"}, "Chào ", this.props.name), " ", React.createElement(Link, {className: "edit", to: '/settings'}, "(cài đặt)")
+                )
+    
+            );
+        }
     }
 })
 
@@ -42594,32 +42717,63 @@ var Weather = React.createClass({displayName: "Weather",
     },
 
     getWindText: function(ms) {
-        if (ms >= 12)
-            return 'Siêu bão';
-        if (ms >= 11)
-            return 'Gió bão cực mạnh';
-        if (ms >= 10)
-            return 'Gió bão dữ dội';
-        if (ms >= 9)
-            return 'Gió bão';
-        if (ms >= 8)
-            return 'Gió rất mạnh';
-        if (ms >= 7)
-            return 'Gió mạnh hơn';
-        if (ms >= 6)
-            return 'Gió mạnh';
-        if (ms >= 5)
-            return 'Gió mạnh vừa phải';
-        if (ms >= 4)
-            return 'Gió vừa phải';
-        if (ms >= 3)
-            return 'Gió nhẹ';
-        if (ms >= 2)
-            return 'Gió nhẹ vừa phải';
-        if (ms >= 1)
-            return 'Gió rất nhẹ';
-        if (ms >= 0)
-            return 'Êm đềm';
+        var userData = getData("user");
+        if (userData.isEnglish) {
+            if (ms >= 12)
+                return 'Hurricane force';
+            if (ms >= 11)
+                return 'Violent storm';
+            if (ms >= 10)
+                return 'Whole gale';
+            if (ms >= 9)
+                return 'Severe gale';
+            if (ms >= 8)
+                return 'Gale';
+            if (ms >= 7)
+                return 'Moderate gale';
+            if (ms >= 6)
+                return 'Strong breeze';
+            if (ms >= 5)
+                return 'Fresh breeze';
+            if (ms >= 4)
+                return 'Moderate breeze';
+            if (ms >= 3)
+                return 'Gentle breeze';
+            if (ms >= 2)
+                return 'Light breeze';
+            if (ms >= 1)
+                return 'Light air';
+            if (ms >= 0)
+                return 'Calm';
+        }
+        else {
+            if (ms >= 12)
+                return 'Siêu bão';
+            if (ms >= 11)
+                return 'Gió bão cực mạnh';
+            if (ms >= 10)
+                return 'Gió bão dữ dội';
+            if (ms >= 9)
+                return 'Gió bão';
+            if (ms >= 8)
+                return 'Gió rất mạnh';
+            if (ms >= 7)
+                return 'Gió mạnh hơn';
+            if (ms >= 6)
+                return 'Gió mạnh';
+            if (ms >= 5)
+                return 'Gió mạnh vừa phải';
+            if (ms >= 4)
+                return 'Gió vừa phải';
+            if (ms >= 3)
+                return 'Gió nhẹ';
+            if (ms >= 2)
+                return 'Gió nhẹ vừa phải';
+            if (ms >= 1)
+                return 'Gió rất nhẹ';
+            if (ms >= 0)
+                return 'Êm đềm';
+        }
     },
 
     render: function() {
@@ -42685,7 +42839,7 @@ var App = React.createClass({displayName: "App",
 
     render: function() {
         var storedData = getData(this.state.storageId);
-        let name = "Google";
+        let engine = "Google";
         let action = "https://google.com/search";
         const icon = `https://external-content.duckduckgo.com/ip3/${
             action.split("://")[1].split("/")[0]
@@ -42707,11 +42861,12 @@ var App = React.createClass({displayName: "App",
                             React.createElement("input", {
                                 autoFocus: true, 
                                 type: "text", 
-                                placeholder: `Search ${name} or type a URL`, 
+                                name: "q", 
+                                placeholder: `Search ${engine} or type a URL`, 
                                 autoComplete: "off"}
                             ), 
                             React.createElement("button", {type: "submit"}, 
-                                React.createElement("img", {src: icon, className: "icon", alt: `${name} icon`})
+                                React.createElement("img", {src: icon, className: "icon", alt: `${engine} icon`})
                             )
                         )
                     ), 
